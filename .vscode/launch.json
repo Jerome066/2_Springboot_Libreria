@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Parte1Application<parte1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.libreria.parte1.Parte1Application",
+            "projectName": "parte1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
