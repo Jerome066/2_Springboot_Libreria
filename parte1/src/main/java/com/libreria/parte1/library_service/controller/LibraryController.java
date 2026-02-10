@@ -2,8 +2,17 @@ package com.libreria.parte1.library_service.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.libreria.parte1.library_service.dto.userDTO;
+
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 
@@ -15,12 +24,12 @@ public class LibraryController {
         return "login";
     }
     //check login
-    @GetMapping("/checkLogin")
-    public String checkLogin(@RequestParam String username, @RequestParam String password) {
-        if (username.equals("admin") && password.equals("admin")) {
-            return "redirect:/welcome";
+    @PostMapping("/checkLogin")
+    public String checkLogin(@Valid @ModelAttribute userDTO userDTO, Model model, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "login";
         } else {
-            return "redirect:/?error=true";
+            return "welcome";
         }
     }
 
