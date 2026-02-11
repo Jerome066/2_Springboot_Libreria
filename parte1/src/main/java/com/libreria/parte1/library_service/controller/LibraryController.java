@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.libreria.parte1.library_service.dto.userDTO;
 
@@ -29,13 +29,17 @@ public class LibraryController {
         if (bindingResult.hasErrors()) {
             return "login";
         } else {
-            return "welcome";
+            model.addAttribute("userDTO", userDTO);
+            return "redirect:/welcome/" + userDTO.getUsername();
         }
     }
 
-
-    @GetMapping("/welcome")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
+    //welcome
+    @GetMapping("/welcome/{username}")
+    public String getMethodName(@PathVariable("username") String username, Model model) {
+        model.addAttribute("username", username);
+        return "welcome";
     }
+
+
 }

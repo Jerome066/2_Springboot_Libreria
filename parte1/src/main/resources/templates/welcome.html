@@ -7,10 +7,11 @@
 </head>
 
 <body>
-
-    <main layout:fragment="content" class="card text-center container pt-5">
+    <main layout:fragment="content" th:object="${username}">
+        <th:block th:replace="~{layouts/fragments/navegation :: navegation}"></th:block>
         <h1>Bienvenido a la biblioteca</h1>
         <p>Esta es la página de bienvenida de la biblioteca.</p>
+        <p>Usuario: [[${username}]]</p>
     </main>
 
 </body>
