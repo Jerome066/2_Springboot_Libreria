@@ -27,5 +27,5 @@ public class alumno {
     private String Carrera;
     private String Activo;
     private String Fecha_Registro;
-    private String Email;
+    private String email;
 }
