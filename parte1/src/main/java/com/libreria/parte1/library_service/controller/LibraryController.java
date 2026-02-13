@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.libreria.parte1.alumno_service.dto.AlumnoDTO;
-import com.libreria.parte1.alumno_service.model.alumno;
-import com.libreria.parte1.library_service.dto.userDTO;
-import com.libreria.parte1.library_service.repository.LibraryRepository;
+import com.libreria.parte1.alumno_service.model.Alumno;
+import com.libreria.parte1.alumno_service.service.AlumnoService;
+import com.libreria.parte1.library_service.model.Prestamo_Libro;
 import com.libreria.parte1.library_service.service.LibraryService;
 import jakarta.validation.Valid;
 
@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LibraryController {
 
     private final LibraryService libraryService;
+    private final AlumnoService alumnoService;
 
-    public LibraryController (LibraryRepository libraryRepository, LibraryService libraryService){
+    public LibraryController (AlumnoService alumnoService, LibraryService libraryService){
+        this.alumnoService = alumnoService;
         this.libraryService = libraryService;
     }
 
@@ -40,20 +42,25 @@ public class LibraryController {
             model.addAttribute("alumnoDTO",alumnoDTO);
             return "login";
         }
-        List<alumno> listaAlumnos = libraryService.Checkuser(alumnoDTO.getEmail());
-        for (alumno alumno : listaAlumnos) {
+        List<Alumno> listaAlumnos = alumnoService.Checkuser(alumnoDTO.getEmail());
+        for (Alumno alumno : listaAlumnos) {
             if (alumno.getEmail().equals(alumnoDTO.getEmail())) {
-                model.addAttribute("alumno", alumno);
-                return "redirect:/welcome";
+                return "redirect:/welcome/" + alumno.getAlumnoId();
             }
         }
         return "login";
     }
 
     //welcome
-    @GetMapping("/welcome")
-    public String getMethodName() {
-        
+    @GetMapping("/welcome/{id}")
+    public String getMethodName(@PathVariable Long id, Model model) {
+        String nombre = alumnoService.getNombreById(id); 
+        List<Prestamo_Libro> ListaPrestamos = libraryService.FindById(id);
+
+
+        model.addAttribute("nombre", nombre);
+        model.addAttribute("ListaPrestamos", ListaPrestamos);
+
         return "welcome";
     }
 

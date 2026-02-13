@@ -7,11 +7,22 @@
 </head>
 
 <body>
-    <main layout:fragment="content" th:object="${username}">
+    <main layout:fragment="content" th:object="${alumno}">
         <th:block th:replace="~{layouts/fragments/navegation :: navegation}"></th:block>
         <h1>Bienvenido a la biblioteca</h1>
         <p>Esta es la página de bienvenida de la biblioteca.</p>
-        <p>Usuario: [[${username}]]</p>
+        <p>Usuario: [[${nombre}]]</p>
+        <h2>Prestamos:</h2>
+        <div>
+            <table>
+                <tr>
+                    <th>Libro</th>
+                </tr>
+                <tr th:each="prestamo : ${ListaPrestamos}">
+                    <td th:text="${prestamo.libro.Titulo}"></td>
+                </tr>
+            </table>
+        </div>
     </main>
 
 </body>

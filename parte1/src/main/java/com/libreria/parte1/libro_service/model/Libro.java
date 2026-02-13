@@ -1,10 +1,10 @@
-package com.libreria.parte1.alumno_service.model;
+package com.libreria.parte1.libro_service.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.libreria.parte1.library_service.model.Prestamo_Libro;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,31 +12,32 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 
 @Entity
-@Table(name = "Alumno")
-public class Alumno {
+@Table(name = "Libro")
+public class Libro {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Alumno_ID")
-    private Long alumnoId;
-    private String nombre;
-    private String Matricula;
-    private String Carrera;
-    private String Activo;
-    private String Fecha_Registro;
-    private String email;
-
-    @OneToMany(mappedBy = "alumno")
-    private List<Prestamo_Libro> prestamos;
+    private Long Libro_ID;
+    private String Titulo;
+    private String Editorial;
+    private String Genero;
+    private LocalDate Publicacion;
+    private int paginas;
+    private String Edicion;
+    private int ejemplares;
+    
+    @OneToMany(mappedBy = "libro")
+    List<Prestamo_Libro> prestamos;
 }
