@@ -34,9 +34,9 @@ public class Libro {
     private String Editorial;
     private String Genero;
     private LocalDate Publicacion;
-    private int paginas;
+    private int Paginas;
     private String Edicion;
-    private int ejemplares;
+    private int Ejemplares;
     
     @OneToMany(mappedBy = "libro")
     List<Prestamo_Libro> prestamos;

@@ -20,6 +20,11 @@
                 </tr>
                 <tr th:each="prestamo : ${ListaPrestamos}">
                     <td th:text="${prestamo.libro.Titulo}"></td>
+                    <td th:text="${prestamo.libro.Editorial}"></td>
+                    <td th:text="${prestamo.libro.Edicion}"></td>
+                    <td th:text="${prestamo.Fecha_Prestamo}"></td>
+                    <td th:text="${prestamo.Fecha_Devolucion}"></td>
+                    <a th:href="@{/devolucion/{id}(id=${prestamo.Prestamo_ID})}" class="btn btn-primary">Devolver</a>
                 </tr>
             </table>
         </div>

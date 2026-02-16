@@ -25,4 +25,12 @@ public class LibraryService {
     public List<Prestamo_Libro> FindById(Long id){
         return libraryR.findByAlumnoAlumnoId(id);
     }
+
+    public void DevolverLibro(Long id){
+        Prestamo_Libro prestamo = libraryR.findById(id).orElse(null);
+        if (prestamo != null) {
+            prestamo.setEstado("Devuelto");
+            libraryR.save(prestamo);
+        }
+    }
 }
