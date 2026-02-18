@@ -24,7 +24,17 @@
                     <td th:text="${prestamo.libro.Edicion}"></td>
                     <td th:text="${prestamo.Fecha_Prestamo}"></td>
                     <td th:text="${prestamo.Fecha_Devolucion}"></td>
-                    <a th:href="@{/devolucion/{id}(id=${prestamo.Prestamo_ID})}" class="btn btn-primary">Devolver</a>
+                    <td th:text="${prestamo.Estado}"></td>
+                    <td>
+                        <form
+                            th:action="@{/devolucion/{id}/{idUser}(id=${prestamo.Prestamo_ID}, idUser=${prestamo.alumno.alumnoId})}"
+                            method="post">
+                            <button type="submit" class="btn btn-primary"
+                                th:disabled="${prestamo.Estado == 'Devuelto'}">
+                                [[${prestamo.Estado == 'Devuelto' ? 'Devuelto' : 'Devolver'}]]
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             </table>
         </div>

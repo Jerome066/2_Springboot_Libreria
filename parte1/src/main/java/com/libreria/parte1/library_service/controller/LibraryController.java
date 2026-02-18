@@ -17,7 +17,6 @@ import com.libreria.parte1.library_service.service.LibraryService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -69,10 +68,10 @@ public class LibraryController {
     // CRUD de prestamos, el alumno puede solicitar un nuevo prestamo, devolver un libro o renovar un prestamo
 
     //Devolver un libro
-    @PostMapping("/devolucion/{id}")
-    public String postMethodName(@PathVariable Long id, @RequestBody String entity) {
+    @PostMapping("/devolucion/{id}/{idUser}")
+    public String postMethodName(@PathVariable Long id, @PathVariable Long idUser) {
         libraryService.DevolverLibro(id);
-        return "redirect:/welcome/" + id;
+        return "redirect:/welcome/" + idUser;
     }
     
 
