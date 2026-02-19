@@ -1,0 +1,16 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/app}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main th:fragment="content">
+        <th:block th:replace="~{layouts/fragments/navegation :: navegation}"></th:block>
+        <h1>Prestamos</h1>
+
+    </main>
+</body>
+</html>

@@ -17,6 +17,11 @@
             <table>
                 <tr>
                     <th>Libro</th>
+                    <th>Editorial</th>
+                    <th>Edicion</th>
+                    <th>Fecha de prestamo</th>
+                    <th>Fecha de devolucion</th>
+                    <th>Estado</th>
                 </tr>
                 <tr th:each="prestamo : ${ListaPrestamos}">
                     <td th:text="${prestamo.libro.Titulo}"></td>
