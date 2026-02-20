@@ -17,7 +17,6 @@ import com.libreria.parte1.library_service.service.LibraryService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -79,7 +78,7 @@ public class LibraryController {
     @GetMapping("/prestamo/{id}")
     public String showPrestamo(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
-        return "prestamo";
+        return "prestamo";   
     }
     
 
