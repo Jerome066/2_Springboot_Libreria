@@ -3,7 +3,6 @@ package com.libreria.parte1.libro_service.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
 import com.libreria.parte1.libro_service.model.Libro;
 import com.libreria.parte1.libro_service.repository.LibroRepository;
 
@@ -22,4 +21,5 @@ public class LibroService {
     public List<Libro> findAllLibros(){
         return libroR.findAll();
     }
+
 }

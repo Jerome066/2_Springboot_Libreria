@@ -14,12 +14,11 @@ import com.libreria.parte1.alumno_service.model.Alumno;
 import com.libreria.parte1.alumno_service.service.AlumnoService;
 import com.libreria.parte1.library_service.model.Prestamo_Libro;
 import com.libreria.parte1.library_service.service.LibraryService;
+
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-
-
-
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class LibraryController {
@@ -27,21 +26,23 @@ public class LibraryController {
     private final LibraryService libraryService;
     private final AlumnoService alumnoService;
 
-    public LibraryController (AlumnoService alumnoService, LibraryService libraryService){
+    public LibraryController(AlumnoService alumnoService, LibraryService libraryService) {
         this.alumnoService = alumnoService;
         this.libraryService = libraryService;
     }
 
-    //Login
+    // Login
     @GetMapping
     public String welcome(Model model) {
         return "login";
     }
-    //check login
+
+    // check login
     @PostMapping("/checkLogin/{email}")
-    public String checkLogin(@PathVariable String email, @Valid @ModelAttribute AlumnoDTO alumnoDTO, BindingResult result, Model model) {
+    public String checkLogin(@PathVariable String email, @Valid @ModelAttribute AlumnoDTO alumnoDTO,
+            BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("alumnoDTO",alumnoDTO);
+            model.addAttribute("alumnoDTO", alumnoDTO);
             return "login";
         }
         List<Alumno> listaAlumnos = alumnoService.Checkuser(alumnoDTO.getEmail());
@@ -53,33 +54,31 @@ public class LibraryController {
         return "login";
     }
 
-    //welcome el alumno puede ver sus prestamos y los detalles de los libros prestados
+    // welcome el alumno puede ver sus prestamos y los detalles de los libros
+    // prestados
     @GetMapping("/welcome/{id}")
     public String getMethodName(@PathVariable Long id, Model model) {
-        String nombre = alumnoService.getNombreById(id); 
+        String nombre = alumnoService.getNombreById(id);
         List<Prestamo_Libro> ListaPrestamos = libraryService.FindById(id);
 
-        model.addAttribute("id",id);
+        model.addAttribute("id", id);
         model.addAttribute("nombre", nombre);
         model.addAttribute("ListaPrestamos", ListaPrestamos);
 
         return "welcome";
     }
 
-    // CRUD de prestamos, el alumno puede solicitar un nuevo prestamo, devolver un libro o renovar un prestamo
-
-    //Devolver un libro
+    // Devolver un libro
     @PostMapping("/devolucion/{id}/{idUser}")
     public String postMethodName(@PathVariable Long id, @PathVariable Long idUser) {
         libraryService.DevolverLibro(id);
         return "redirect:/welcome/" + idUser;
     }
-    // Solicitar un nuevo prestamo
-    @GetMapping("/prestamo/{id}")
-    public String showPrestamo(@PathVariable Long id, Model model) {
-        model.addAttribute("id", id);
-        return "prestamo";   
-    }
-    
 
+    // Solicitar un nuevo prestamo
+    @PostMapping("/solicitud/{idLibro}/{idUser}")
+    public void postMethodName(@PathVariable Long idLibro, @PathVariable Long idUser, @RequestBody String entity) {
+        libraryService.solicitarPrestamo(idLibro, idUser);
+        
+    }
 }
