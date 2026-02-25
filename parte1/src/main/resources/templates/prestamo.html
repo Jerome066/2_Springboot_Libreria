@@ -6,12 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <main th:fragment="content" th:object="${id}">
+    <main th:fragment="content">
         <th:block th:replace="~{layouts/fragments/navegation :: navegation}"></th:block>
         <th:block th:replace="~{layouts/fragments/navegation :: navegation}"></th:block>
         <h1>Prestamos</h1>
-
+        <div>
+            <table>
+                <tr>
+                    <th>Libro</th>
+                    <th>Editorial</th>
+                    <th>Genero</th>
+                    <th>Edicion</th>
+                    <th>Fecha de publicación</th>
+                </tr>
+                <tr th:each="libro : ${Libros}">
+                    <td th:text="${libro.Titulo}"></td>
+                    <td th:text="${libro.Editorial}"></td>
+                    <td th:text="${libro.Genero}"></td>
+                    <td th:text="${libro.Edicion}"></td>
+                    <td th:text="${libro.Fecha_Publicacion}"></td>
+                    <form
+                        th:action="@{/devolucion/{id}/{idUser}(id=${prestamo.Prestamo_ID}, idUser=${prestamo.alumno.alumnoId})}"
+                        method="post">
+                        <button type="submit" class="btn btn-primary">
+                            solicitar prestamo
+                        </button>
+                    </form>
+                </tr>
+            </table>
+        </div>
     </main>
 </body>
+
 </html>

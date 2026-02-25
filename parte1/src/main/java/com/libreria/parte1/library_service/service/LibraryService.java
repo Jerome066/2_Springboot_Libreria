@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.libreria.parte1.alumno_service.model.Alumno;
 import com.libreria.parte1.alumno_service.repository.AlumnoRepository;
 import com.libreria.parte1.library_service.model.Prestamo_Libro;
 import com.libreria.parte1.library_service.repository.LibraryRepository;
@@ -44,6 +45,14 @@ public class LibraryService {
 
     public void solicitarPrestamo(Long idLibro, Long idUser) {
         
-        List<Libro> libro = libroR.findById(idLibro);
+        Libro libro = libroR.findById(idLibro).orElse(null);
+        Alumno alumno = alumnoR.findById(idUser).orElse(null);
+        if (libro != null && alumno != null) {
+            Prestamo_Libro prestamo = new Prestamo_Libro();
+            prestamo.setLibro(libro);
+            prestamo.setAlumno(alumno);
+            prestamo.setEstado("Prestado");
+            libraryR.save(prestamo);
+        }
     }
 }

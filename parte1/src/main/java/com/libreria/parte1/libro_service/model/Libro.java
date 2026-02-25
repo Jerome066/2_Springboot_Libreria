@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.libreria.parte1.library_service.model.Prestamo_Libro;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +30,8 @@ public class Libro {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Libro_ID;
+    @Column(name = "Libro_ID")
+    private Long LibroId;
     private String Titulo;
     private String Editorial;
     private String Genero;
