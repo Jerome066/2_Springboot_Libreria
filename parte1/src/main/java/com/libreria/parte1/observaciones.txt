@@ -1,0 +1,8 @@
+Se puede agregar un:
+@ModelAsttrubute('users')
+public List<User> userModel(){
+    List<User>users = Arrays.asList(......)
+    return users
+}
+
+En thymeleaf podemos usarlo para llamar la informacion de los usuarios con "users"
