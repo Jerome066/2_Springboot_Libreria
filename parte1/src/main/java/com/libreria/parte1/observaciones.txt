@@ -6,3 +6,14 @@ public List<User> userModel(){
 }
 
 En thymeleaf podemos usarlo para llamar la informacion de los usuarios con "users"
+
+------------------------
+obtener informacion con  httpServletRequest
+@GetMapping ("/request")
+public ParamMixDTO request (httpServletRequest request){
+
+    ParamMixDTO params = new ParamMixDTO();
+    paramas.setCode(Integer.parseInt(request,getParameter("code"))) // devuelve String
+    return params
+
+}
